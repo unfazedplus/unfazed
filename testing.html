@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UNFAZED | Modern Apparel</title>
+    <style>
+        /* CSS Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Custom Properties */
+        :root {
+            --primary: #ff3566;
+            --secondary: #00ccff;
+            --accent: #ffcc00;
+            --dark: #1a1a1a;
+            --light: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        /* Base Styles */
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links li a {
+            font-weight: 500;
+            transition: var(--transition);
+        }
+
+        .nav-links li a:hover {
+            color: var(--primary);
+        }
+
+        .cart-icon {
+            font-size: 1.5rem;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background-color: var(--primary);
+            color: var(--light);
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.75rem;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            color: var(--light);
+            padding-top: 5rem;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            letter-spacing: 5px;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+        }
+
+        .cta-button {
+            padding: 1rem 2rem;
+            background-color: var(--accent);
+            color: var(--dark);
+            border: none;
+            border-radius: 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Category Section */
+        .category-section {
+            padding: 5rem 2rem;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary);
+        }
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category-card {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .category-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .category-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .category-card:hover .category-image {
+            transform: scale(1.1);
+        }
+
+        .category-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+            padding: 1.5rem;
+            color: var(--light);
+            transition: var(--transition);
+        }
+
+        .category-card:hover .category-overlay {
+            padding-bottom: 2.5rem;
+        }
+
+        .category-name {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Featured Products */
+        .featured-section {
+            padding: 5rem 2rem;
+            background-color: #f8f8f8;
+            text-align: center;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image-container {
+            position: relative;
+            height: 300px;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.05);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: var(--primary);
+            color: var(--light);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .product-details {
+            padding: 1.5rem;
+            text-align: left;
+        }
+
+        .product-name {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .product-category {
+            color: #666;
+            font-size: 0.9rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .add-to-cart {
+            background-color: var(--dark);
+            color: var(--light);
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+        }
+
+        .add-to-cart:hover {
+            background-color: var(--primary);
+        }
+
+        /* Collection Banner */
+        .collection-banner {
+            height: 400px;
+            background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)), url('/api/placeholder/1200/400');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--light);
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .banner-content {
+            max-width: 600px;
+        }
+
+        .banner-content h2 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .banner-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: var(--light);
+            padding: 4rem 2rem;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .footer-column h3 {
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            font-size: 1.2rem;
+        }
+
+        .footer-links {
+            list-style: none;
+        }
+
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: #333;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .social-icon:hover {
+            background-color: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        /* Product Filter */
+        .filter-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-button {
+            padding: 0.5rem 1.5rem;
+            background-color: transparent;
+            border: 2px solid var(--primary);
+            color: var(--primary);
+            border-radius: 30px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .filter-button.active, .filter-button:hover {
+            background-color: var(--primary);
+            color: var(--light);
+        }
+
+        /* Mobile Nav */
+        .menu-toggle {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background-color: var(--dark);
+                flex-direction: column;
+                justify-content: flex-start;
+                align-items: center;
+                padding-top: 2rem;
+                transition: var(--transition);
+            }
+
+            .nav-links.active {
+                left: 0;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .banner-content h2 {
+                font-size: 2rem;
+            }
+        }
+        /* Add to your existing CSS */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+        }
+        
+        .modal-content {
+            position: relative;
+            background-color: var(--light);
+            margin: 15% auto;
+            padding: 2rem;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+        }
+        
+        .close {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .cart-item {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cart-item img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        .form-row {
+            display: flex;
+            gap: 1rem;
+        }
+        @media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background: var(--dark);
+        padding: 1rem 0;
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+}
+@media (max-width: 480px) {
+    .categories, .products {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 2rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+}
+@media (max-width: 480px) {
+    .modal-content {
+        width: 90%;
+        padding: 1rem;
+    }
+}
+      
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">UNFAZED</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#men">Men</a></li>
+            <li><a href="#women">Women</a></li>
+            <li><a href="#bags">Bags</a></li>
+            <li><a href="#others">Others</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        <div class="cart-icon">
+            <span>🛒</span>
+            <span class="cart-count">0</span>
+        </div>
+        <div class="menu-toggle">☰</div>
+    </header>
+    <!-- Add this after your header -->
+    <div id="cart-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Your Cart</h2>
+            <div class="cart-items"></div>
+            <div class="cart-total">Total: $0.00</div>
+            <button id="checkout-btn" class="cta-button">Proceed to Checkout</button>
+        </div>
+    </div>
+    <br>
+    <!-- Add this before closing body tag -->
+    <br><br>
+    <div id="checkout-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Checkout</h2>
+            <form id="checkout-form">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="card">Card Number</label>
+                    <input type="text" id="card" required pattern="[0-9]{16}">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="expiry">Expiry Date</label>
+                        <input type="text" id="expiry" required pattern="(0[1-9]|1[0-2])\/([0-9]{2})">
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" required pattern="[0-9]{3,4}">
+                    </div>
+                </div>
+                <br>
+                <button type="submit" class="cta-button">Complete Purchase</button>
+            </form>
+        </div>
+    </div>
+    
+
+    <!-- Hero Section -->
+    <section class="hero" id="home">
+        <h1>UNFAZED</h1>
+        <p>Express yourself with our bold, modern collection. Stay true. Stay UNFAZED.</p>
+        <button class="cta-button">SHOP NOW</button>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="category-section">
+        <h2 class="section-title">Shop By Category</h2>
+        <div class="categories">
+            <div class="category-card" id="men">
+                <img src="MEN'S  COLLECTION.jpg" alt="Men's Collection" class="category-image">
+                <div class="category-overlay">
+                    <h3 class="category-name">Men's Collection</h3>
+                    <p>Bold designs for the modern man</p>
+                </div>
+            </div>
+            <div class="category-card" id="women">
+                <img src="WOMEN'S COLLECTION.jpg" alt="Women's Collection" class="category-image">
+                <div class="category-overlay">
+                    <h3 class="category-name">Women's Collection</h3>
+                    <p>Stylish and empowering designs</p>
+                </div>
+            </div>
+            <div class="category-card" id="bags">
+                <img src="BAGS COLLECTION.jpg" alt="Bags Collection" class="category-image">
+                <div class="category-overlay">
+                    <h3 class="category-name">Bags</h3>
+                    <p>Functional fashion statements</p>
+                </div>
+            </div>
+            <div class="category-card" id="others">
+                <img src="ACCESORIES COLLECTION.jpg" alt="Accessories Collection" class="category-image">
+                <div class="category-overlay">
+                    <h3 class="category-name">Accessories</h3>
+                    <p>Complete your look with our accessories</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products Section -->
+    <section class="featured-section">
+        <h2 class="section-title">Featured Products</h2>
+        <div class="filter-container">
+            <button class="filter-button active" data-filter="all">All</button>
+            <button class="filter-button" data-filter="men">Men</button>
+            <button class="filter-button" data-filter="women">Women</button>
+            <button class="filter-button" data-filter="bags">Bags</button>
+            <button class="filter-button" data-filter="accessories">Accessories</button>
+        </div>
+        <div class="products">
+            <!-- Men's Product 1 -->
+            <div class="product-card" data-category="men">
+                <div class="product-image-container">
+                    <img src="TEE 1.jpg" alt="Men's T-Shirt" class="product-image">
+                    <span class="product-badge">New</span>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">UNFAZED Signature Tee</h3>
+                    <p class="product-category">Men's T-Shirts</p>
+                    <p class="product-price">$39.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Men's Product 2 -->
+            <div class="product-card" data-category="men">
+                <div class="product-image-container">
+                    <img src="URBAN HOODIE.jpg" alt="Men's Hoodie" class="product-image">
+                    <span class="product-badge">Bestseller</span>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Urban Hoodie</h3>
+                    <p class="product-category">Men's Outerwear</p>
+                    <p class="product-price">$79.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Women's Product 1 -->
+            <div class="product-card" data-category="women">
+                <div class="product-image-container">
+                    <img src="BOLD STATEMENT.jpg" alt="Women's Dress" class="product-image">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Bold Statement Dress</h3>
+                    <p class="product-category">Women's Dresses</p>
+                    <p class="product-price">$89.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Women's Product 2 -->
+            <div class="product-card" data-category="women">
+                <div class="product-image-container">
+                    <img src="JACKO.jpg" alt="Women's Jacket" class="product-image">
+                    <span class="product-badge">Sale</span>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Minimalist Jacket</h3>
+                    <p class="product-category">Women's Outerwear</p>
+                    <p class="product-price">$129.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Bag Product 1 -->
+            <div class="product-card" data-category="bags">
+                <div class="product-image-container">
+                    <img src="EX.jpg" alt="Backpack" class="product-image">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Urban Explorer Backpack</h3>
+                    <p class="product-category">Backpacks</p>
+                    <p class="product-price">$69.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Bag Product 2 -->
+            <div class="product-card" data-category="bags">
+                <div class="product-image-container">
+                    <img src="TOTE.jpg" alt="Tote Bag" class="product-image">
+                    <span class="product-badge">New</span>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Everyday Tote</h3>
+                    <p class="product-category">Tote Bags</p>
+                    <p class="product-price">$49.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Accessory Product 1 -->
+            <div class="product-card" data-category="accessories">
+                <div class="product-image-container">
+                    <img src="SCARF.jpg" alt="Cap" class="product-image">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">UNFAZED Scarf</h3>
+                    <p class="product-category">Headwear</p>
+                    <p class="product-price">$29.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            
+            <!-- Accessory Product 2 -->
+            <div class="product-card" data-category="accessories">
+                <div class="product-image-container">
+                    <img src="WATCH M.jpg" alt="Watch" class="product-image">
+                    <span class="product-badge">Limited</span>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Minimalist Watch</h3>
+                    <p class="product-category">Watches</p>
+                    <p class="product-price">$119.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Collection Banner -->
+    <section class="collection-banner">
+        <div class="banner-content">
+            <h2>Spring Collection 2025</h2>
+            <p>Our latest arrivals are designed with comfort and style in mind. Express yourself with our bold new collection.</p>
+            <button class="cta-button">Explore Now</button>
+        </div>
+    </section>
+
+    <!-- Men's Section -->
+    <section class="featured-section" id="men-section">
+        <h2 class="section-title">Men's Collection</h2>
+        <div class="products">
+            <!-- Men's Products -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="CARGO PANTS.jpg" alt="Men's Pants" class="product-image">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Cargo Pants</h3>
+                    <p class="product-category">Men's Bottoms</p>
+                    <p class="product-price">$69.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="JACKET 3.jpg" alt="Men's Jacket" class="product-image">
+                    <span class="product-badge">New</span>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Bomber Jacket</h3>
+                    <p class="product-category">Men's Outerwear</p>
+                    <p class="product-price">$119.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="SHIRT 2.jpg" alt="Men's Shirt" class="product-image">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Button-Up Shirt</h3>
+                    <p class="product-category">Men's Shirts</p>
+                    <p class="product-price">$59.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="KNEAT SWEATER.jpg" alt="Men's Sweater" class="product-image">
+                    <span class="product-badge">Bestseller</span>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Knit Sweater</h3>
+                    <p class="product-category">Men's Knitwear</p>
+                    <p class="product-price">$89.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Women's Section -->
+    <section class="featured-section" id="women-section">
+        <h2 class="section-title">Women's Collection</h2>
+        <div class="products">
+            <!-- Women's Products -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="BLOUSE.jpg" alt="Women's Blouse" class="product-image">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Silk Blouse</h3>
+                    <p class="product-category">Women's Tops</p>
+                    <p class="product-price">$69.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="CUT CUT.jpg" alt="Women's Skirt" class="product-image">
+                    <span class="product-badge">New</span>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Pleated Skirt</h3>
+                    <p class="product-category">Women's Bottoms</p>
+                    <p class="product-price">$79.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="JUMP SUIT.jpg" alt="Women's Jumpsuit" class="product-image">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Utility Jumpsuit</h3>
+                    <p class="product-category">Women's One-Pieces</p>
+                    <p class="product-price">$109.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="women cardigan.jpg" alt="Women's Cardigan" class="product-image">
+                    <span class="product-badge">Sale</span>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Oversized Cardigan</h3>
+                    <p class="product-category">Women's Knitwear</p>
+                    <p class="product-price">$84.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bags Section -->
+    <section class="featured-section" id="bags-section">
+        <h2 class="section-title">Bags Collection</h2>
+        <div class="products">
+            <!-- Bags Products -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="MESSENGER BAG.jpg" alt="Messenger Bag" class="product-image">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Messenger Bag</h3>
+                    <p class="product-category">Messenger Bags</p>
+                    <p class="product-price">$89.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="Crossbody Bag.jpg" alt="Crossbody Bag" class="product-image">
+                    <span class="product-badge">New</span>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Crossbody Bag</h3>
+                    <p class="product-category">Small Bags</p>
+                    <p class="product-price">$59.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="Weekender Bag.jpg" alt="Weekender Bag" class="product-image">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Weekender Bag</h3>
+                    <p class="product-category">Travel Bags</p>
+                    <p class="product-price">$129.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="Evening Clutch.jpg" alt="Clutch" class="product-image">
+                    <span class="product-badge">Limited</span>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Evening Clutch</h3>
+                    <p class="product-category">Clutches</p>
+                    <p class="product-price">$49.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Accessories Section -->
+    <section class="featured-section" id="others-section">
+        <h2 class="section-title">Accessories</h2>
+        <div class="products">
+            <!-- Accessories Products -->
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="Knit Beanie.jpg" alt="Beanie" class="product-image">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Knit Beanie</h3>
+                    <p class="product-category">Headwear</p>
+                    <p class="product-price">$34.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="istockphoto-1185230550-612x612.jpg" alt="Sunglasses" class="product-image">
+                    <span class="product-badge">Trending</span>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Square Sunglasses</h3>
+                    <p class="product-category">Eyewear</p>
+                    <p class="product-price">$79.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="Leather Belt.jpg" alt="Belt" class="product-image">
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Leather Belt</h3>
+                    <p class="product-category">Belts</p>
+                    <p class="product-price">$39.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+            <div class="product-card">
+                <div class="product-image-container">
+                    <img src="Patterned Scarf.jpg" alt="Scarf" class="product-image">
+                    <span class="product-badge">New</span>
+                </div>
+                <div class="product-details">
+                    <h3 class="product-name">Patterned Scarf</h3>
+                    <p class="product-category">Scarves</p>
+                    <p class="product-price">$29.99</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="featured-section" style="background-color: var(--accent); color: var(--dark);">
+        <h2 class="section-title" style="color: var(--dark);">Stay Updated</h2>
+        <p style="max-width: 600px; margin: 0 auto 2rem; text-align: center;">Subscribe to our newsletter to receive updates on new arrivals, special offers, and exclusive content.</p>
+        <div style="display: flex; justify-content: center; max-width: 500px; margin: 0 auto;">
+            <input type="email" placeholder="Your email address" style="flex: 1; padding: 1rem; border: none; border-radius: 5px 0 0 5px;">
+            <button style="padding: 1rem 2rem; background-color: var(--dark); color: var(--light); border: none; border-radius: 0 5px 5px 0; cursor: pointer;">Subscribe</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>UNFAZED</h3>
+                <p>Express yourself with our bold, modern collection. Stay true. Stay UNFAZED.</p>
+                <div class="social-icons">
+                    <a href="#" class="social-icon">fb</a>
+                    <a href="#" class="social-icon">ig</a>
+                    <a href="#" class="social-icon">tw</a>
+                    <a href="#" class="social-icon">yt</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Shop</h3>
+                <ul class="footer-links">
+                    <li><a href="#men-section">Men's Collection</a></li>
+                    <li><a href="#women-section">Women's Collection</a></li>
+                    <li><a href="#bags-section">Bags</a></li>
+                    <li><a href="#others-section">Accessories</a></li>
+                    <li><a href="#">New Arrivals</a></li>
+                    <li><a href="#">Sale</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>Help</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Customer Service</a></li>
+                    <li><a href="#">Track Your Order</a></li>
+                    <li><a href="#">Returns & Exchanges</a></li>
+                    <li><a href="#">Shipping</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h3>About</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Our Story</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Sustainability</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 UNFAZED. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // Mobile Menu Toggle
+        const menuToggle = document.querySelector('.menu-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Product Filtering
+        const filterButtons = document.querySelectorAll('.filter-button');
+        const products = document.querySelectorAll('.featured-section .product-card');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                const filter = button.getAttribute('data-filter');
+                
+                products.forEach(product => {
+                    // Show all products if filter is 'all'
+                    if (filter === 'all') {
+                        product.style.display = 'block';
+                    } else {
+                        // Show only products that match the filter
+                        if (product.getAttribute('data-category') === filter) {
+                            product.style.display = 'block';
+                        } else {
+                            product.style.display = 'none';
+                        }
+                    }
+                });
+            });
+        });
+        
+        // Shopping Cart Functionality
+        const addToCartButtons = document.querySelectorAll('.add-to-cart');
+        const cartCount = document.querySelector('.cart-count');
+        let itemsInCart = 0;
+        
+        addToCartButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                itemsInCart++;
+                cartCount.textContent = itemsInCart;
+                
+                // Animation effect
+                button.textContent = "Added ✓";
+                button.style.backgroundColor = "#28a745";
+                
+                setTimeout(() => {
+                    button.textContent = "Add to Cart";
+                    button.style.backgroundColor = "";
+                }, 1500);
+            });
+        });
+        
+        // Smooth Scrolling for Navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                let targetElement = document.querySelector(targetId);
+                
+                if (targetId === '#men') {
+                    targetElement = document.querySelector('#men-section');
+                } else if (targetId === '#women') {
+                    targetElement = document.querySelector('#women-section');
+                } else if (targetId === '#bags') {
+                    targetElement = document.querySelector('#bags-section');
+                } else if (targetId === '#others') {
+                    targetElement = document.querySelector('#others-section');
+                }
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 70,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    navLinks.classList.remove('active');
+                }
+            });
+        });
+        
+        // Product Image Hover Effect
+        const productCards = document.querySelectorAll('.product-card');
+        
+        productCards.forEach(card => {
+            const image = card.querySelector('.product-image');
+            
+            card.addEventListener('mouseenter', () => {
+                image.style.transform = 'scale(1.05)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                image.style.transform = '';
+            });
+        });
+        
+        // Newsletter Form Validation
+        const newsletterForm = document.querySelector('input[type="email"]').parentElement;
+        const emailInput = document.querySelector('input[type="email"]');
+        const subscribeButton = document.querySelector('input[type="email"] + button');
+        
+        subscribeButton.addEventListener('click', () => {
+            const email = emailInput.value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (email && emailRegex.test(email)) {
+                emailInput.value = '';
+                alert('Thank you for subscribing to our newsletter!');
+            } else {
+                alert('Please enter a valid email address.');
+            }
+        });
+        // Add this to your existing JavaScript
+        class ShoppingCart {
+            constructor() {
+                this.items = [];
+                this.total = 0;
+            }
+        
+            addItem(product) {
+                this.items.push(product);
+                this.total += product.price;
+                this.updateCartUI();
+            }
+        
+            removeItem(index) {
+                const removedItem = this.items.splice(index, 1)[0];
+                this.total -= removedItem.price;
+                this.updateCartUI();
+            }
+        
+            updateCartUI() {
+                const cartCount = document.querySelector('.cart-count');
+                cartCount.textContent = this.items.length;
+                
+                // Update cart modal if it's open
+                this.renderCartModal();
+            }
+        
+            renderCartModal() {
+                const cartModal = document.getElementById('cart-modal');
+                if (!cartModal) return;
+        
+                const cartItems = cartModal.querySelector('.cart-items');
+                cartItems.innerHTML = '';
+        
+                this.items.forEach((item, index) => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    cartItem.innerHTML = `
+                        <img src="${item.image}" alt="${item.name}">
+                        <div class="cart-item-details">
+                            <h4>${item.name}</h4>
+                            <p>$${item.price.toFixed(2)}</p>
+                        </div>
+                        <button onclick="cart.removeItem(${index})">Remove</button>
+                    `;
+                    cartItems.appendChild(cartItem);
+                });
+        
+                const cartTotal = cartModal.querySelector('.cart-total');
+                cartTotal.textContent = `Total: $${this.total.toFixed(2)}`;
+            }
+        }
+        
+        // Initialize cart
+        const cart = new ShoppingCart();
+        // Add to your existing JavaScript
+        document.querySelector('.cart-icon').addEventListener('click', () => {
+            const cartModal = document.getElementById('cart-modal');
+            cartModal.style.display = 'block';
+            cart.renderCartModal();
+        });
+        
+        document.getElementById('checkout-btn').addEventListener('click', () => {
+            if (cart.items.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            document.getElementById('cart-modal').style.display = 'none';
+            document.getElementById('checkout-modal').style.display = 'block';
+        });
+        
+        // Close modals when clicking on X or outside
+        document.querySelectorAll('.modal .close').forEach(closeBtn => {
+            closeBtn.addEventListener('click', () => {
+                closeBtn.closest('.modal').style.display = 'none';
+            });
+        });
+        
+        window.addEventListener('click', (e) => {
+            if (e.target.classList.contains('modal')) {
+                e.target.style.display = 'none';
+            }
+        });
+        
+        // Handle checkout form submission
+        document.getElementById('checkout-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            // In a real application, you would send this data to your server
+            alert('Thank you for your purchase! Your order has been processed.');
+            
+            // Clear cart and close modal
+            cart.items = [];
+            cart.total = 0;
+            cart.updateCartUI();
+            document.getElementById('checkout-modal').style.display = 'none';
+            e.target.reset();
+        });
+        
+        // Update add to cart buttons
+        document.querySelectorAll('.add-to-cart').forEach(button => {
+            button.addEventListener('click', () => {
+                const productCard = button.closest('.product-card');
+                const product = {
+                    name: productCard.querySelector('.product-name').textContent,
+                    price: parseFloat(productCard.querySelector('.product-price').textContent.replace('$', '')),
+                    image: productCard.querySelector('.product-image').src
+                };
+                
+                cart.addItem(product);
+                
+                // Animation effect
+                button.textContent = "Added ✓";
+                button.style.backgroundColor = "#28a745";
+                
+                setTimeout(() => {
+                    button.textContent = "Add to Cart";
+                    button.style.backgroundColor = "";
+                }, 1500);
+            });
+        });
+        
+    </script>
+</body>
+</html>
